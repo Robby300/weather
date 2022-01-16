@@ -30,7 +30,7 @@ public class WeatherHistoryService {
     public static String findInDb() throws IOException, InterruptedException {
         Optional<WeatherHistory> weatherToday = weatherHistoryRepo.findById(LocalDate.now());
         String weather = "";
-        if (weatherToday != null) {
+        if (weatherToday.isEmpty()) {
             weather = weatherToday.get().getWeatherValue();
         } else {
             weather = getFromYandex();

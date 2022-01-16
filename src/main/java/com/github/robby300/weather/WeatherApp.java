@@ -1,13 +1,15 @@
 package com.github.robby300.weather;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * Main class.
  */
+@SpringBootApplication
 public class WeatherApp {
 
-    public static final String JAVA_REPOSITORY_TEMPLATE = "maven-template-repository";
-
     public static void main(String[] args) {
-        System.out.printf("Hello world, %s!%n",JAVA_REPOSITORY_TEMPLATE);
+        SpringApplication.run(WeatherApp.class, args);
     }
 }
