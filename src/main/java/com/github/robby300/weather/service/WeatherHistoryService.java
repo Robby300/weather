@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.Authenticator;
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -53,8 +50,8 @@ public class WeatherHistoryService {
                 .build();
 
         String response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)).body();
-
-        return response.substring(response.lastIndexOf("weather__temp\'>") + 15, response.lastIndexOf("weather__temp\'>") + 18);
+        int target = response.lastIndexOf("weather__temp\'>");
+        return response.substring(target + 15, target + 18);
 
     }
 }
