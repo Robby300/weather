@@ -1,9 +1,9 @@
-package com.github.romankh3.maventemplaterepository;
+package com.github.robby300.weather;
 
 /**
  * Main class for Java Repository Template.
  */
-public class MavenTemplateRepository {
+public class WeatherApp {
 
     public static final String JAVA_REPOSITORY_TEMPLATE = "maven-template-repository";
 
