@@ -30,7 +30,7 @@ public class WeatherHistoryService {
     public static String findInDb() throws IOException, InterruptedException {
         Optional<WeatherHistory> weatherToday = weatherHistoryRepo.findById(LocalDate.now());
         String weather = "";
-        if (weatherToday.isEmpty()) {
+        if (!weatherToday.isEmpty()) {
             weather = weatherToday.get().getWeatherValue();
         } else {
             weather = getFromYandex();
@@ -54,7 +54,7 @@ public class WeatherHistoryService {
 
         String response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)).body();
 
-        return response.substring(response.indexOf("\"weather__temp\">"), response.indexOf("\"weather__temp\">") + 4);
+        return response.substring(response.lastIndexOf("weather__temp\'>") + 15, response.lastIndexOf("weather__temp\'>") + 18);
 
     }
 }
