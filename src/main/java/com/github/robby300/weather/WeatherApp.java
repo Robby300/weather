@@ -1,7 +1,7 @@
 package com.github.robby300.weather;
 
 /**
- * Main class for Java Repository Template.
+ * Main class.
  */
 public class WeatherApp {
 
