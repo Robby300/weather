@@ -11,11 +11,9 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/weather")
 public class WeatherController {
-    private final WeatherHistoryService weatherHistoryService;
 
     @Autowired
     public WeatherController(WeatherHistoryService weatherHistoryService) {
-        this.weatherHistoryService = weatherHistoryService;
     }
 
     @GetMapping

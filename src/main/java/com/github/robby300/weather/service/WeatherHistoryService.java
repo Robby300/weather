@@ -21,13 +21,13 @@ public class WeatherHistoryService {
 
     @Autowired
     public WeatherHistoryService(WeatherHistoryRepo weatherHistoryRepo) {
-        this.weatherHistoryRepo = weatherHistoryRepo;
+        WeatherHistoryService.weatherHistoryRepo = weatherHistoryRepo;
     }
 
     public static String findInDb() throws IOException, InterruptedException {
         Optional<WeatherHistory> weatherToday = weatherHistoryRepo.findById(LocalDate.now());
-        String weather = "";
-        if (!weatherToday.isEmpty()) {
+        String weather;
+        if (weatherToday.isPresent()) {
             weather = weatherToday.get().getWeatherValue();
         } else {
             weather = getFromYandex();
@@ -50,8 +50,8 @@ public class WeatherHistoryService {
                 .build();
 
         String response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)).body();
-        int target = response.lastIndexOf("weather__temp\'>");
-        return response.substring(target + 15, target + 18);
+        int target = response.lastIndexOf("weather__temp'>");
+        return response.substring(target + 15, response.indexOf("°"));
 
     }
 }
