@@ -51,7 +51,7 @@ public class WeatherHistoryService {
 
         String response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)).body();
         int target = response.lastIndexOf("weather__temp'>");
-        return response.substring(target + 15, response.indexOf("°"));
-
+        //return response.substring(target + 15, response.indexOf("°"));
+        return response.substring(target + 15, target + 18);
     }
 }
