@@ -12,12 +12,14 @@ import java.io.IOException;
 @RequestMapping("/weather")
 public class WeatherController {
 
+    private final WeatherHistoryService weatherHistoryService;
     @Autowired
     public WeatherController(WeatherHistoryService weatherHistoryService) {
+        this.weatherHistoryService = weatherHistoryService;
     }
 
     @GetMapping
     public String getWeather() throws IOException, InterruptedException {
-        return WeatherHistoryService.findInDb();
+        return weatherHistoryService.getWeather();
     }
 }

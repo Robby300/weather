@@ -17,14 +17,14 @@ import java.util.Optional;
 
 @Service
 public class WeatherHistoryService {
-    private static WeatherHistoryRepo weatherHistoryRepo;
+    private final WeatherHistoryRepo weatherHistoryRepo;
 
     @Autowired
     public WeatherHistoryService(WeatherHistoryRepo weatherHistoryRepo) {
-        WeatherHistoryService.weatherHistoryRepo = weatherHistoryRepo;
+        this.weatherHistoryRepo = weatherHistoryRepo;
     }
 
-    public static String findInDb() throws IOException, InterruptedException {
+    public String getWeather() throws IOException, InterruptedException {
         Optional<WeatherHistory> weatherToday = weatherHistoryRepo.findById(LocalDate.now());
         String weather;
         if (weatherToday.isPresent()) {
@@ -37,7 +37,7 @@ public class WeatherHistoryService {
         return weather;
     }
 
-    public static String getFromYandex() throws IOException, InterruptedException {
+    public String getFromYandex() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .followRedirects(HttpClient.Redirect.ALWAYS)
